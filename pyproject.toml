@@ -1,0 +1,42 @@
+[project]
+name = "timeseriesfuser"
+version = "0.3.0"
+authors = [
+    { name = "Anthony Sweeney", email = "safsweeney@gmail.com" },
+]
+description = "TimeSeriesFuser - Time series data merging with event-driven distribution."
+readme = "README.md"
+requires-python = ">=3.9"
+dynamic = ["dependencies"]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: AGPL-3.0-only",
+    "Intended Audience :: Developers",
+    "Development Status :: 3 - Alpha",
+]
+[project.urls]
+Homepage = "https://github.com/klovanone/timeseriesfuser/"
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+    "setuptools>=61.0",
+    "wheel"
+]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["timeseriesfuser*"]
+exclude = []
+namespaces = false
+[tool.pylint]
+max-line-length = 88
+disable = [
+    "C0114", # (missing-module-docstring)
+    "C0115", # (missing-class-docstring)
+    "C0116", # (missing-function-docstring)
+    "R0903", # (too-few-public-methods)
+    "R0913", # (too-many-arguments)
+    "W0105", # (pointless-string-statement)
+]
