@@ -1,3 +1,9 @@
+"""
+Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
+
+Please view the LICENSE file for the terms and conditions
+associated with this software.
+"""
 import polars as pl
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots

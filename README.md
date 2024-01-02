@@ -80,7 +80,7 @@ def process_tsf():
     spreadpath = Path(__file__).parent / f'data/full_tests/sourcedata/spread/binance/{sym}'
     data_spread = ParquetSrc(files_path=spreadpath)
     di_spread = DataInfo(descriptor='bidask_meme',
-                            datareader=data_spread,
+                         datareader=data_spread,
                          convert_timestamp_function=convert_time_format,
                          timestamp_col_name='str_iso_timestamp',
                          file_sort_idx=0,
@@ -177,7 +177,7 @@ Anthony Sweeney - email: [safsweeney@gmail.com](safsweeney@gmail.com)
 
 ## LICENSE:
 	
-	Copyright (C) 2023-2004  Anthony Sweeney
+	Copyright (C) 2023-2024 Anthony Sweeney
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published by

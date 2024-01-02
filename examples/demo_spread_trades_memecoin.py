@@ -1,3 +1,9 @@
+"""
+Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
+
+Please view the LICENSE file for the terms and conditions
+associated with this software.
+"""
 from datetime import timezone, datetime
 from pathlib import Path
 from plotly.subplots import make_subplots
