@@ -138,7 +138,7 @@ It's recommended to create a virtual environment for testing if you already use 
 
 - Python 3.9+ 
 
-- Polars 0.19.8
+- Polars 0.19.8 (or later)
 
 Timeseriesfuser can be installed via Pypi, or by cloning the repo if you want to run the tests: 
 
