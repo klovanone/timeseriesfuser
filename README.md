@@ -140,14 +140,16 @@ It's recommended to create a virtual environment for testing if you already use 
 
 - Polars 0.19.8
 
+Timeseriesfuser can be installed via Pypi, or by cloning the repo if you want to run the tests: 
 
-**<clone with github by runnning: >** 
 
-How to test
 
-**<install via pip>** 
+```
+pip install timeseriesfuser
+```
 
-pip install etc. 
+
+
     
 
 
