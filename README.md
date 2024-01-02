@@ -1,7 +1,7 @@
 # Time series data merging with event-driven distribution. 
 
 
-A small lightweight library designed to easily merge together multiple data sources in chronological order with minimal manual data-munging. I created this tool for a financial project that I had been working on, as it was becoming a chore to have to merge time series data from many alternative data formats. Primarily designed to be used as a tool to simulate live data replay, but it can also be used to save merged and processed data for later re-use. 
+A small lightweight library designed to easily merge together multiple data sources in chronological order with minimal manual data-munging. I created this tool for a financial services project that I had been working on, as it was becoming a chore to have to merge time series data from many alternative data formats. Primarily designed to be used as a tool to simulate live data replay, but it can also be used to save merged and processed data for later re-use. 
 
 
 ##  Benefits:
@@ -167,7 +167,7 @@ It should be relatively easy to add new file and database formats by subclassing
 
 ## Limitations:
 
-- sometimes events from sources will be missed if they are exactly on a boundary and data is unsorted. This can happen when capturing from an API that sends out of order events. A more in-depth sliding window implementation is on the things todo. A workaround is to sort and save the data source so that data is pre-sorted if you d  
+- sometimes events from sources will be missed if they are exactly on a boundary and data is unsorted. This can happen when capturing from an API that sends out of order events. A more in-depth sliding window implementation is on the things todo. A workaround is to sort and save the data source so that data is pre-sorted before processing.
     
 
 ## Author:
@@ -177,7 +177,7 @@ Anthony Sweeney - email: [safsweeney@gmail.com](safsweeney@gmail.com)
 
 ## LICENSE:
 	
-	Copyright (C) 2023  Anthony Sweeney
+	Copyright (C) 2023-2004  Anthony Sweeney
 
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as published by
