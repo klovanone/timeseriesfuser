@@ -27,8 +27,8 @@ requires = [
 ]
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["timeseriesfuser*"]
-exclude = []
+include = ["timeseriesfuser*", "timeseriesfuser.helpers*","examples*","LICENSE","*.md"]
+exclude = ["timeseriesfuser.utilities_scripts(hidden from github)","*.svg"]
 namespaces = false
 [tool.pylint]
 max-line-length = 88
