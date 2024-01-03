@@ -31,7 +31,7 @@ include = ["timeseriesfuser*", "timeseriesfuser.helpers*","examples*","LICENSE",
 exclude = ["timeseriesfuser.utilities_scripts(hidden from github)","*.svg"]
 namespaces = false
 [tool.pylint]
-max-line-length = 88
+max-line-length = 100
 disable = [
     "C0114", # (missing-module-docstring)
     "C0115", # (missing-class-docstring)
