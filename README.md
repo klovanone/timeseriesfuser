@@ -152,7 +152,7 @@ To run tests, Pytest and Pytest-mock are required:
 pip install pytest pytest-mock
 ```
 
-For the large data test in *test_core_single_nonoverlapping.py', [download the 600MB test data from HERE](https://drive.google.com/file/d/1UIRyHzi4yBGZe3Ci52Fxx5diNFkMvGdU/view?usp=drive_link) and unzip into **timeseriesfuser/tests/integration/data/full_tests/sourcedata/trades/binance/BTC-USDT**
+For the large data test in *test_core_single_nonoverlapping.py*, [download the 600MB test data from HERE](https://drive.google.com/file/d/1UIRyHzi4yBGZe3Ci52Fxx5diNFkMvGdU/view?usp=drive_link) and unzip into *timeseriesfuser/tests/integration/data/full_tests/sourcedata/trades/binance/BTC-USDT/*
 
 
 
