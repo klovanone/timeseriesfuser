@@ -70,6 +70,6 @@ def test_tsf_multi_overlap(tsf_handler_overlapping):
     vpath = Path(__file__).parent / f'data/verification/multi_overlap_drop_merge.parquet'
     verifydf = pl.read_parquet(vpath)
     outputdf = pl.DataFrame(hdlr.full_data, schema=hdlr.output_schema)
-    assert outputdf.frame_equal(verifydf)
+    assert outputdf.equals(verifydf)
     #  there is also a plotly chart to verify that it looks ok -
     #  run plot_check_core_multi_overlapping_drop_merge.py

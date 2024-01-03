@@ -1056,7 +1056,7 @@ class TimeSeriesFuser:
                 try:
                     df = \
                         df.select(
-                            (pl.when((pl.first().cumcount() == 0) &
+                            (pl.when((pl.first().cum_count() == 0) &
                                      (pl.col(df.columns[i]).is_null()))
                              .then(pl.lit(x))
                              .otherwise(pl.col(df.columns[i])))

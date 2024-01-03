@@ -117,7 +117,7 @@ def test_tsf_single_no_overlap(tsf_handler_non_overlapping):
     tsfp.start_tsf()
     verifydf = pl.read_parquet('./data/verification/single_nooverlap_dydx_ethusdperp.parquet')
     outputdf = pl.DataFrame(hdlr.full_data)
-    assert outputdf.frame_equal(verifydf)
+    assert outputdf.equals(verifydf)
 
 
 @pytest.mark.slow
@@ -127,4 +127,4 @@ def test_tsf_single_no_overlap_large(tsf_handler_non_overlapping_large):
     tsfp.start_tsf()
     verifydf = pl.read_csv('./data/verification/single_nooverlap_binance_btcusdt_large_1h.csv')
     outputdf = pl.DataFrame(hdlr.full_data)
-    assert outputdf.frame_equal(verifydf)
+    assert outputdf.equals(verifydf)

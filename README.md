@@ -138,15 +138,21 @@ It's recommended to create a virtual environment for testing if you already use 
 
 - Python 3.9+ 
 
-- Polars 0.19.8 (or later)
+- Polars 0.20.3 (or later)
 
-Timeseriesfuser can be installed via Pypi, or by cloning the repo if you want to run the tests: 
-
-
+Timeseriesfuser can be installed via Pypi:
 
 ```
 pip install timeseriesfuser
 ```
+
+To run tests, Pytest and Pytest-mock are required:
+
+```
+pip install pytest pytest-mock
+```
+
+For the large data test in *test_core_single_nonoverlapping.py', [download the 600MB test data from HERE](https://drive.google.com/file/d/1UIRyHzi4yBGZe3Ci52Fxx5diNFkMvGdU/view?usp=drive_link) and unzip into **timeseriesfuser/tests/integration/data/full_tests/sourcedata/trades/binance/BTC-USDT**
 
 
 

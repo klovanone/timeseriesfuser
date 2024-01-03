@@ -101,7 +101,8 @@ class FilesSrc(Src):
     A class for handling files as a data source.
     Attributes:
         files_path: Union[str, Path]: The path to the folder containing the files.
-        file_sort_regex: Optional[str]: The regex to use to sort the files. Defaults to '\d+'.
+        file_sort_regex: Optional[str]: The regex to use to sort the files. Defaults to find any
+            number in the filename and sorts ascending.
         file_sort_idx: Optional[int]: The index of the sorted files to use. Defaults to -1.
         has_headers: Optional[bool]: True if the files have headers, False if not. Defaults to
             True.

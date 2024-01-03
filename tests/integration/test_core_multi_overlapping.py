@@ -71,4 +71,4 @@ def test_tsf_multi_overlap(tsf_handler_overlapping):
     vpath = Path(__file__).parent / f'data/verification/multi_overlap_millis.parquet'
     verifydf = pl.read_parquet(vpath)
     outputdf = pl.DataFrame(hdlr.full_data, schema=hdlr.output_schema)
-    assert outputdf.frame_equal(verifydf)
+    assert outputdf.equals(verifydf)

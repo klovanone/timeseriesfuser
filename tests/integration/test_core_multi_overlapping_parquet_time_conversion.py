@@ -84,4 +84,4 @@ def test_tsf_multi_overlap(tsf_handler_overlapping):
     verifydf = pl.read_parquet(vpath)
     outputdf = pl.DataFrame(hdlr.full_data, schema=hdlr.output_schema)
     outputdf = outputdf.select(verifydf.columns)
-    assert outputdf.frame_equal(verifydf)
+    assert outputdf.equals(verifydf)
