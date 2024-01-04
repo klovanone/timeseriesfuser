@@ -14,7 +14,7 @@ from timeseriesfuser.classes import BatchEveryIntervalHandler
 
 @pytest.fixture
 def setup_parquet_data_1second():
-    fpath = Path('./data/interval_handler/1second_letters.parquet').resolve()
+    fpath = Path(__file__).parent / 'data/interval_handler/1second_letters.parquet'
     df = pl.read_parquet(source=fpath)
     columns = df.columns
     timestamp_col = 'Timestamp'
@@ -30,8 +30,9 @@ def data_1s(setup_parquet_data_1second):
 
 @pytest.fixture
 def handler_1s(mocker):
+    op = Path(__file__).parent / 'data/interval_handler/output'
     bihandler = BatchEveryIntervalHandler(batch_interval='1s',
-                                          output_path='./data/interval_handler/output',
+                                          output_path=op,
                                           save_every_n_batch=10000000000,  #  never save
                                           disable_pl_inference=True,
                                           store_full=True)
@@ -41,7 +42,7 @@ def handler_1s(mocker):
 
 @pytest.fixture
 def setup_parquet_data_1minute():
-    fpath = Path('./data/interval_handler/1minute_letters.parquet').resolve()
+    fpath = Path(__file__).parent / 'data/interval_handler/1minute_letters.parquet'
     df = pl.read_parquet(source=fpath)
     columns = df.columns
     timestamp_col = 'Timestamp'
@@ -57,8 +58,9 @@ def data_1m(setup_parquet_data_1minute):
 
 @pytest.fixture
 def handler_1m(mocker):
+    op = Path(__file__).parent / 'data/interval_handler/output'
     bihandler = BatchEveryIntervalHandler(batch_interval='1m',
-                                          output_path='./data/interval_handler/output',
+                                          output_path=op,
                                           save_every_n_batch=10000000000,    # never save for test
                                           disable_pl_inference=True,
                                           store_full=True)
@@ -68,7 +70,7 @@ def handler_1m(mocker):
 
 @pytest.fixture
 def setup_parquet_data_1day():
-    fpath = Path('./data/interval_handler/1day_letters.parquet').resolve()
+    fpath = Path(__file__).parent / 'data/interval_handler/1day_letters.parquet'
     df = pl.read_parquet(source=fpath)
     columns = df.columns
     timestamp_col = 'Timestamp'
@@ -84,8 +86,9 @@ def data_1d(setup_parquet_data_1day):
 
 @pytest.fixture
 def handler_1d(mocker):
+    op = Path(__file__).parent / 'data/interval_handler/output'
     bihandler = BatchEveryIntervalHandler(batch_interval='1d',
-                                          output_path='./data/interval_handler/output',
+                                          output_path=op,
                                           save_every_n_batch=10000000000,   # never save for test
                                           disable_pl_inference=True,
                                           store_full=True)
