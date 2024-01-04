@@ -6,6 +6,7 @@ associated with this software.
 """
 import pytest
 import polars as pl
+from pathlib import Path
 from timeseriesfuser.classes import DataInfo, ExampleHandler
 from timeseriesfuser.core import TimeSeriesFuser
 from timeseriesfuser.datasources import ParquetSrc
@@ -15,7 +16,8 @@ from timeseriesfuser.helpers.helpers import toutcisotime
 @pytest.fixture
 def setup_parquet_tsf():
     hdlr = ExampleHandler()
-    datar = ParquetSrc(files_path='./data/timestamps_start_end/parquet')
+    fp = Path(__file__).parent / 'data/timestamps_start_end/parquet'
+    datar = ParquetSrc(files_path=fp)
     data_info = DataInfo(
         descriptor='testdata',
         datareader=datar,
