@@ -1,5 +1,8 @@
 # Time series data merging with event-driven distribution. 
 
+![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
+[![PyPi](https://img.shields.io/badge/PyPi-timeseriesfuser-brightgreen.svg)](https://pypi.python.org/pypi/timeseriesfuser)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a8f4fba17c9248589c58cec3b004f427)](https://app.codacy.com/gh/klovanone/timeseriesfuser/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 A small lightweight library designed to easily merge together multiple data sources in chronological order with minimal manual data-munging. I created this tool for a financial services project that I had been working on, as it was becoming a chore to have to merge time series data from many alternative data formats. Primarily designed to be used as a tool to simulate live data replay, but it can also be used to save merged and processed data for later re-use. 
 
