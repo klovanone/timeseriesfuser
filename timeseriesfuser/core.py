@@ -20,7 +20,7 @@ from timeseriesfuser import LOGSPATH
 from timeseriesfuser.classes import BaseHandler, DataInfo, ReplayStatusObj
 from timeseriesfuser.helpers import helpers
 from timeseriesfuser.helpers.helpers import toutcisotime
-from timeseriesfuser.statics import FEATUREFLAG
+#  from timeseriesfuser.statics import FEATUREFLAG
 
 
 class TimeSeriesFuser:

@@ -202,7 +202,6 @@ class ServiceExit(Exception):
     """
     pass
 
-
 def service_shutdown(signum, frame):
     """
     Function to catch signals and trigger a clean exit of all running threads and the main program.

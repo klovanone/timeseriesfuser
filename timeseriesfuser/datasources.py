@@ -122,6 +122,7 @@ class FilesSrc(Src):
         self.compression = self._check_compression()  # autodetect if files are compressed
         self.datasrc = self._generate_data_paths(self.files_path)
 
+    @abstractmethod
     def _generate_data_paths(self, base_path: Union[str, Path]) -> Path:
         """
         Generate the paths to filter out everything but the correct extention
@@ -132,6 +133,7 @@ class FilesSrc(Src):
         """
         pass
 
+    @abstractmethod
     def _check_compression(self) -> bool:
         """
         Check if the files in the folder are compressed or not via file extension.

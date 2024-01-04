@@ -20,7 +20,7 @@ import polars as pl
 
 from timeseriesfuser.datasources import Src
 from timeseriesfuser.helpers.helpers import toutcisotime
-from timeseriesfuser.statics import FEATUREFLAG
+#  from timeseriesfuser.statics import FEATUREFLAG
 
 
 @dataclass
@@ -658,7 +658,7 @@ class BatchEveryIntervalHandler(BatchHandler):
         if self.ffill_keys is not None:
             #  modify ffills_keys to match the new column names
             for fkey in self.ffill_keys.copy():
-                for k, v in rename_cols.items():
+                for k in rename_cols.keys():
                     if k.split(separator)[0] == fkey:
                         self.ffill_keys.remove(fkey) if fkey in self.ffill_keys else None
                         self.ffill_keys.append(k)
