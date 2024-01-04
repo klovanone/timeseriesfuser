@@ -4,12 +4,13 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-import pytest
-import polars as pl
 from pathlib import Path
 
+import polars as pl
+import pytest
+
+from timeseriesfuser.classes import BatchEveryIntervalHandler, DataInfo
 from timeseriesfuser.core import TimeSeriesFuser
-from timeseriesfuser.classes import DataInfo, BatchEveryIntervalHandler
 from timeseriesfuser.datasources import CSVSrc
 from timeseriesfuser.helpers.helpers import toutcisotime
 

@@ -4,7 +4,8 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-import os
+from pathlib import Path
+
 import polars as pl
 import pytest
 
@@ -16,7 +17,8 @@ from timeseriesfuser.datasources import ParquetSrc
 @pytest.fixture
 def ff_tsf():
     hdlr = ExampleHandler()
-    datar = ParquetSrc(files_path='./data/forward_fill')
+    fp = Path(__file__).parent / 'data/forward_fill'
+    datar = ParquetSrc(files_path=fp)
     data_info = DataInfo(
         descriptor='testdata_ff',
         datareader=datar,
@@ -37,10 +39,9 @@ def test_core_forward_fill_singlefile(ff_tsf):
     it is preferable to test the private method _forward_fill_dataframe directly.
     """
     #  set filepath to source directory
-    sourcepath = './data/forward_fill'
-    files = [file for file in os.listdir(sourcepath) if file.endswith('.parquet')]
-    files = sorted(files)
-    df = pl.read_parquet(f'{sourcepath}/{files[0]}')
+    sourcepath = Path(__file__).parent / 'data/forward_fill'
+    files = sorted(file for file in sourcepath.glob('*.parquet'))
+    df = pl.read_parquet(files[0])
     filled_df = ff_tsf._forward_fill_dataframe(df)
     filled_last_row = filled_df.tail(1).rows(named=True)[0]
     # note: rowdata changes slightly between single and multi
@@ -62,12 +63,11 @@ def test_core_forward_fill_multifile(ff_tsf):
     _forward_fill_dataframe directly.
     """
     #  set filepath to source directory
-    sourcepath = './data/forward_fill'
-    files = [file for file in os.listdir(sourcepath) if file.endswith('.parquet')]
-    files = sorted(files)
+    sourcepath = Path(__file__).parent / 'data/forward_fill'
+    files = sorted(file for file in sourcepath.glob('*.parquet'))
     filled_df = None
     for f in files:
-        df = pl.read_parquet(f'{sourcepath}/{f}')
+        df = pl.read_parquet(f)
         filled_df = ff_tsf._forward_fill_dataframe(df)
     filled_last_row = filled_df.tail(1).rows(named=True)[0]
     # note: rowdata changes slightly between single and multi

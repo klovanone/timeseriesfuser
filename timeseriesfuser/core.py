@@ -10,16 +10,17 @@ import logging
 import math
 import time
 import warnings
-import polars as pl
 from datetime import datetime, timezone
-from typing import Optional, Union, Any
 from pathlib import Path
+from typing import Any, Optional, Union
+
+import polars as pl
 
 from timeseriesfuser import LOGSPATH
-from timeseriesfuser.statics import FEATUREFLAG
-from timeseriesfuser.classes import DataInfo, BaseHandler, ReplayStatusObj
+from timeseriesfuser.classes import BaseHandler, DataInfo, ReplayStatusObj
 from timeseriesfuser.helpers import helpers
 from timeseriesfuser.helpers.helpers import toutcisotime
+#  from timeseriesfuser.statics import FEATUREFLAG
 
 
 class TimeSeriesFuser:
@@ -101,7 +102,7 @@ class TimeSeriesFuser:
             dict: self.proc_results: The results of the processing
         """
         if len(self.datainfos) == 0:
-            raise RuntimeError(f'No Valid DataInfos to process, exiting.')
+            raise RuntimeError('No Valid DataInfos to process, exiting.')
         start_timer = time.time()
         start_ts, end_ts = self._pre_setup()
         if self.di_global_col_rename:
@@ -116,7 +117,7 @@ class TimeSeriesFuser:
         self._end_proc(rp_runstate=rp_runstate, start_proc_time=start_timer)
         # Now replay is finished, continue as normal
         self.logger.info('Merge complete.')
-        self.logger.info(f'TimeSeriesFuser FINISHED.')
+        self.logger.info('TimeSeriesFuser FINISHED.')
         return self.process_results
 
     def stop_tsf(self, forceclose: bool = False) -> None:
@@ -195,9 +196,9 @@ class TimeSeriesFuser:
         #  human error.
         if valid_dis:
             if self.global_procstart > self.global_procend:
-                raise ValueError(f'proc mode start time is after end time!!!')
+                raise ValueError('proc mode start time is after end time!!!')
             if self.global_procstart == self.global_procend:
-                raise ValueError(f'proc mode start time is the same as the end time!!!')
+                raise ValueError('proc mode start time is the same as the end time!!!')
         self.datainfos_to_remove = remove_dis
 
     def _remove_out_of_bounds_data_infos(self) -> None:
@@ -270,7 +271,7 @@ class TimeSeriesFuser:
                 raise NotImplementedError('No non-headered files support for CSV files yet')
 
         if len(self.datainfos) == 0:
-            self.logger.info(f'No Valid DataInfos to process, exiting.')
+            self.logger.info('No Valid DataInfos to process, exiting.')
             raise RuntimeError(
                 f'No Valid entries in files from times {toutcisotime(startproc_ts)} '
                 f'to {toutcisotime(endproc_ts)} - exiting.')
@@ -446,15 +447,15 @@ class TimeSeriesFuser:
                             tdfsl.append(
                                 di.cdf.filter(
                                     (di.cdf[
-                                         self.di_secondary_sort_col] > di.last_secondary_sort_id) &
-                                    (di.cdf[self.di_timestamp_col] <= cend_ts) &
-                                    (di.cdf[self.di_timestamp_col] <= endproc_ts)
+                                        self.di_secondary_sort_col] > di.last_secondary_sort_id)
+                                    & (di.cdf[self.di_timestamp_col] <= cend_ts)
+                                    & (di.cdf[self.di_timestamp_col] <= endproc_ts)
                                 ))  # only takes 5ms, so don't worry about performance here
                         else:
                             tdfsl.append(di.cdf.filter(
-                                (di.cdf[self.di_timestamp_col] <= cend_ts) &
-                                (di.cdf[self.di_timestamp_col] <= endproc_ts) &
-                                (di.cdf[self.di_timestamp_col] >= self.last_ts)
+                                (di.cdf[self.di_timestamp_col] <= cend_ts)
+                                & (di.cdf[self.di_timestamp_col] <= endproc_ts)
+                                & (di.cdf[self.di_timestamp_col] >= self.last_ts)
                             ))
                         if di.cfile_end_ts == cend_ts:
                             di.load_next_file = True
@@ -552,13 +553,13 @@ class TimeSeriesFuser:
                 di = anchordi
                 if self.di_secondary_sort_col:
                     tdf = di.cdf.filter(
-                        (di.cdf[self.di_secondary_sort_col] > di.last_secondary_sort_id) &
-                        (di.cdf[self.di_timestamp_col] <= endproc_ts))
+                        (di.cdf[self.di_secondary_sort_col] > di.last_secondary_sort_id)
+                        & (di.cdf[self.di_timestamp_col] <= endproc_ts))
                     tdf = tdf.sort([self.di_timestamp_col,
                                     self.di_secondary_sort_col])
                 else:
-                    tdf = di.cdf.filter((di.cdf[self.di_timestamp_col] <= endproc_ts) &
-                                        (di.cdf[self.di_timestamp_col] >= self.last_ts))
+                    tdf = di.cdf.filter((di.cdf[self.di_timestamp_col] <= endproc_ts)
+                                        & (di.cdf[self.di_timestamp_col] >= self.last_ts))
                     tdf = tdf.sort([self.di_timestamp_col])
 
                 if not self.di_same_header_fmt:
@@ -825,18 +826,18 @@ class TimeSeriesFuser:
             ignore_errors=self.force_ignore_pl_read_errors)
 
     def _get_data_chunk_start_timestamp(self, *, datainfo: DataInfo, source: str):
-        first_ts = datainfo.load_datasrc_get_start_ts_overlay(source,
-                                                    ignore_errors=self.force_ignore_pl_read_errors)
+        first_ts = datainfo.load_datasrc_get_start_ts_overlay(
+            source, ignore_errors=self.force_ignore_pl_read_errors)
         return first_ts
 
     def _get_data_chunk_end_timestamp(self, *, datainfo: DataInfo, source: str):
-        last_ts = datainfo.load_datasrc_get_end_ts_overlay(source,
-                                             ignore_errors=self.force_ignore_pl_read_errors)
+        last_ts = datainfo.load_datasrc_get_end_ts_overlay(
+            source, ignore_errors=self.force_ignore_pl_read_errors)
         return last_ts
 
     def _get_data_chunk_start_end_timestamps(self, *, datainfo: DataInfo, source: str):
-        first_ts, last_ts = datainfo.load_datasrc_get_start_end_ts_overlay(source,
-                                                    ignore_errors=self.force_ignore_pl_read_errors)
+        first_ts, last_ts = datainfo.load_datasrc_get_start_end_ts_overlay(
+            source, ignore_errors=self.force_ignore_pl_read_errors)
         return first_ts, last_ts
 
     def _get_data_sources(self, *, datainfo: DataInfo):
@@ -888,8 +889,8 @@ class TimeSeriesFuser:
         bt_starttime = datetime.utcfromtimestamp(rp_runstate.start_ts / 1000).replace(
             tzinfo=timezone.utc)
         days = (bt_endtime - bt_starttime).days
-        self.logger.info(f'---------------------------------------------------------------------'
-                         f'------------------')
+        self.logger.info('---------------------------------------------------------------------'
+                         '------------------')
         self.logger.info(f'Total runtime:  {(time.time() - start_proc_time) / 60:.3f} minutes')
         self.logger.info(f'proc from {bt_starttime.isoformat()} to {bt_endtime.isoformat()}: '
                          f'proc over {days} days')
@@ -1056,8 +1057,8 @@ class TimeSeriesFuser:
                 try:
                     df = \
                         df.select(
-                            (pl.when((pl.first().cum_count() == 0) &
-                                     (pl.col(df.columns[i]).is_null()))
+                            (pl.when((pl.first().cum_count() == 0)
+                                     & (pl.col(df.columns[i]).is_null()))
                              .then(pl.lit(x))
                              .otherwise(pl.col(df.columns[i])))
                             .alias(df.columns[i]) for i, x in enumerate(
@@ -1065,7 +1066,7 @@ class TimeSeriesFuser:
                         )
                     df = df.select(pl.all().forward_fill())
                 except Exception as e:
-                    self.logger.error(f'Error forward filling dataframe')
+                    self.logger.error('Error forward filling dataframe')
                     raise e
         self.last_row_vals = df.row(-1, named=True)
         return df

@@ -1,0 +1,11 @@
+[flake8]
+ignore = E501,F405,F403,W503
+exclude = 
+	tests/*
+	docs/*
+	*.md
+	__init__.py
+	plotting.py
+	utilities.py
+
+

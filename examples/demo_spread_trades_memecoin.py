@@ -4,15 +4,16 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-from datetime import timezone, datetime
+from datetime import datetime, timezone
 from pathlib import Path
-from plotly.subplots import make_subplots
 
-from timeseriesfuser.classes import DataInfo, BatchEveryIntervalHandler
-from timeseriesfuser.core import TimeSeriesFuser
-from timeseriesfuser.datasources import ParquetSrc
 import plotly.graph_objects as go
 import polars as pl
+from plotly.subplots import make_subplots
+
+from timeseriesfuser.classes import BatchEveryIntervalHandler, DataInfo
+from timeseriesfuser.core import TimeSeriesFuser
+from timeseriesfuser.datasources import ParquetSrc
 
 
 #  the time format in the files is in string/iso standard, use a Polars expression to convert into

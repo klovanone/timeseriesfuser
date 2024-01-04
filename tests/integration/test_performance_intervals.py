@@ -6,8 +6,9 @@ associated with this software.
 """
 import itertools
 from datetime import datetime, timedelta, timezone
-from timeseriesfuser.classes import interval_string_to_milliseconds, get_next_interval
 
+from timeseriesfuser.classes import (get_next_interval,
+                                     interval_string_to_milliseconds)
 
 # function to increment the timestamp by 1 millisecond 100000 times using datetime
 # quick and dirty just to confirm that the timeseriesfuser style is faster since it is simply

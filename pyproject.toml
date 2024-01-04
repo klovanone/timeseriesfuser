@@ -17,6 +17,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Development Status :: 3 - Alpha",
 ]
+
 [project.urls]
 Homepage = "https://github.com/klovanone/timeseriesfuser/"
 [build-system]
@@ -25,11 +26,13 @@ requires = [
     "setuptools>=61.0",
     "wheel"
 ]
+
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["timeseriesfuser*", "timeseriesfuser.helpers*","examples*","LICENSE","*.md"]
 exclude = ["timeseriesfuser.utilities_scripts(hidden from github)","*.svg"]
 namespaces = false
+
 [tool.pylint]
 max-line-length = 100
 disable = [
@@ -40,3 +43,18 @@ disable = [
     "R0913", # (too-many-arguments)
     "W0105", # (pointless-string-statement)
 ]
+
+[tool.pylint.MASTER]
+ignore-paths = ["/__init__.py"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "serial",
+]
+
+[tool.isort]
+skip = [".gitignore", "setup.py", "__init__.py"]
+extend_skip_glob = ["*utilities_scripts(hidden from github)*"]
+
+
