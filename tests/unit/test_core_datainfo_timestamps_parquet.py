@@ -4,9 +4,11 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-import pytest
-import polars as pl
 from pathlib import Path
+
+import polars as pl
+import pytest
+
 from timeseriesfuser.classes import DataInfo, ExampleHandler
 from timeseriesfuser.core import TimeSeriesFuser
 from timeseriesfuser.datasources import ParquetSrc

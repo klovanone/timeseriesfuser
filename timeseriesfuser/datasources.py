@@ -8,7 +8,6 @@ import glob
 import logging
 import os
 import re
-
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
@@ -57,7 +56,7 @@ class Src(ABC):
         """
         Load the data from the datasource into polars.
         Args:
-            read_source: how to read the data source. 
+            read_source: how to read the data source.
             ignore_errors: bool: True if errors should be ignored. This relates to Polars
                 misinterpreting the datatypes of the columns. If True, then Polars will attempt to
                 cast to the datatypes passed down from the DataInfo class. **warning**: if the
@@ -148,7 +147,7 @@ class FilesSrc(Src):
         """
         Load the data from the datasource into polars.
         Args:
-            read_source: how to read the data source. 
+            read_source: how to read the data source.
             ignore_errors: bool: True if errors should be ignored. This relates to Polars
                 misinterpreting the datatypes of the columns. If True, then Polars will attempt to
                 cast to the datatypes passed down from the DataInfo class. **warning**: if the
@@ -287,8 +286,7 @@ class CSVSrc(FilesSrc):
                 df = pl.DataFrame(lrows, self.datatypes_schema)
             else:
                 raise ValueError(
-                    f'No valid data at end of file with proc_csv_endfile_lowmem_mode'
-                    f'set.')
+                    'No valid data at end of file with proc_csv_endfile_lowmem_mode set.')
         return df
 
     def get_global_start_data(self, *, ignore_errors: bool) -> pl.DataFrame:

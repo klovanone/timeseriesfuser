@@ -4,13 +4,14 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-import polars as pl
-import pytest
 from datetime import datetime
 from pathlib import Path
+
+import polars as pl
+import pytest
+
 from timeseriesfuser.classes import DataInfo
 from timeseriesfuser.datasources import CSVSrc
-
 
 # fixtures created for future testing re-use
 

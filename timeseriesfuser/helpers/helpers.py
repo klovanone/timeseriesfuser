@@ -6,13 +6,13 @@ associated with this software.
 """
 import logging
 import math
-import numpy as np
 import re
 import warnings
-
 from datetime import datetime, timezone
 from threading import Thread
 from typing import Union
+
+import numpy as np
 
 
 def get_intervals_seconds(timeframe: str) -> int:
@@ -28,8 +28,8 @@ def get_intervals_seconds(timeframe: str) -> int:
         return secs * 1000
     else:
         raise NotImplementedError(
-            f'Only seconds are supported. Please use a timeframe in seconds, e.g., 1s, 5s, 10s, '
-            f'etc.')
+            'Only seconds are supported. Please use a timeframe in seconds, e.g., 1s, 5s, 10s, '
+            'etc.')
 
 
 def count_digits(n: Union[int, float]) -> int:
@@ -81,8 +81,8 @@ def convert_time_obj_to_epoch_format(dateobj: Union[int, float, str, datetime, n
             offset = dateobj.utcoffset().total_seconds()
         except AttributeError:
             dateobj = dateobj.astimezone(timezone.utc)
-            warnings.warn(f'Warning - naive timezone passed in - attempting to guess timezone and '
-                          f'converting to UTC.')
+            warnings.warn('Warning - naive timezone passed in - attempting to guess timezone and '
+                          'converting to UTC.')
             offset = 0
         if offset == 0:  # already a datetime, in UTC format!
             timestamp = int(dateobj.timestamp() * 1000)
@@ -90,8 +90,8 @@ def convert_time_obj_to_epoch_format(dateobj: Union[int, float, str, datetime, n
             dateobj = dateobj.astimezone(timezone.utc)
             timestamp = int(dateobj.timestamp() * 1000)
     else:
-        raise RuntimeError(f'Terminating - the format of the datetime is not a recognized format '
-                           f'(string, epoch timestamp format, Python Datetime, or np.int64).')
+        raise RuntimeError('Terminating - the format of the datetime is not a recognized format '
+                           '(string, epoch timestamp format, Python Datetime, or np.int64).')
     return timestamp
 
 

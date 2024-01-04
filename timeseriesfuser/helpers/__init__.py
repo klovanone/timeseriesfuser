@@ -1,3 +1,4 @@
+# isort: skip_file
 import sys
 from pathlib import Path
 

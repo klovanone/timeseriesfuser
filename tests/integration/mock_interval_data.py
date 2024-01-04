@@ -4,12 +4,13 @@ Copyright (C) 2023-2024 Anthony Sweeney - email: safsweeney@gmail.com
 Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
-import os.path
-from datetime import datetime, timedelta, timezone
 import itertools
+import os.path
 import random
-import pandas as pd
 import string
+from datetime import datetime, timedelta, timezone
+
+import pandas as pd
 
 
 def create_1second():

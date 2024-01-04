@@ -6,21 +6,21 @@ associated with this software.
 """
 import collections
 import gzip
-import logging
 import itertools
-import polars as pl
+import logging
 import uuid
 import warnings
-
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional, Union, Callable
+from typing import Callable, Optional, Union
 
+import polars as pl
+
+from timeseriesfuser.datasources import Src
 from timeseriesfuser.helpers.helpers import toutcisotime
 from timeseriesfuser.statics import FEATUREFLAG
-from timeseriesfuser.datasources import Src
 
 
 @dataclass
@@ -65,9 +65,9 @@ class DataInfo:
         Create the additional attributes for the dataclass to be modified during processing.
         """
         if self.timestamp_col_num is None and self.timestamp_col_name is None:
-            raise RuntimeError(f'Either timestamp_col_num or timestamp_col_name must be set.')
+            raise RuntimeError('Either timestamp_col_num or timestamp_col_name must be set.')
         if self.timestamp_col_num is not None and self.timestamp_col_name is not None:
-            raise RuntimeError(f'Only one of timestamp_col_num or timestamp_col_name can be set.')
+            raise RuntimeError('Only one of timestamp_col_num or timestamp_col_name can be set.')
         if self.descriptor is None:
             self.descriptor = str(uuid.uuid4())[-12:]  # a random descriptor if not provided
         if self.timestamp_col_name is not None:
@@ -159,8 +159,8 @@ class DataInfo:
                 self.datatypes_schema = self.datatypes
                 self.datareader.datatypes_schema = self.datatypes_schema
             else:
-                raise RuntimeError(f'Invalid datatype format. Must be a list of datatypes or '
-                                   f'dict with column name.')
+                raise RuntimeError('Invalid datatype format. Must be a list of datatypes or '
+                                   'dict with column name.')
             if not polars_dtypes:
                 msg = f'Warning - [{self.descriptor}] datatypes are not in polars dtypes format. ' \
                       f'Converting to polars format, but this may affect performance or cause ' \
@@ -463,7 +463,7 @@ class BatchHandler(BaseHandler):
                 self.output_fext = '.csv'
         elif self.output_fmt == 'parquet':
             self.output_fext = '.parquet'
-        if self.store_full_fn != f'FULLDATA':
+        if self.store_full_fn != 'FULLDATA':
             if any(ext in self.store_full_fn for ext in ['csv', 'csv.gz', 'parquet']):
                 file_extension = Path(self.store_full_fn).suffix
                 if file_extension != self.output_fext:
@@ -474,7 +474,7 @@ class BatchHandler(BaseHandler):
                 self.store_full_fn = self.store_full_fn
         self.output_fnum = 0
         self.output_cur_fname = self.output_path / f'output-{self.output_fnum}' / \
-                                f'{self.output_fext}'
+            f'{self.output_fext}'
         self.output_full_fname = None
 
     def _batch_append(self, msg: dict):
@@ -504,12 +504,12 @@ class BatchHandler(BaseHandler):
                 self.full_data += self.data_batch
             self.output_fnum += 1
             self.output_cur_fname = self.output_path / f'output-{self.output_fnum}' / \
-                                    f'{self.output_fext}'
+                f'{self.output_fext}'
             self.data_batch = []
             if final and self.store_full_data:
                 #  save full data to file
                 self.output_full_fname = self.output_path / f'{self.store_full_fn}' / \
-                                         f'{self.output_fext}'
+                    f'{self.output_fext}'
                 fdf = pl.DataFrame(self.full_data, schema=self.output_schema)
                 self._file_write(fdf, self.output_full_fname)
 
@@ -603,7 +603,7 @@ class BatchEveryIntervalHandler(BatchHandler):
             #  deal with any missed timestamps
             prev_filled = False
             catchup_ts = get_next_interval(timestamp, self.batch_interval, initialize=True) - \
-                         self.batch_interval_ms
+                self.batch_interval_ms
             self.prev_msg['__timestamp'] = self.next_batch_ts
             self._batch_append(self.prev_msg.copy())
             self.next_batch_ts = next(self.next_batch_gen)
@@ -756,7 +756,7 @@ def get_next_interval(timestamp: int, interval: str, initialize: bool = False,
         d = timevalue / 1000
         if initialize:
             next_interval = ((_ts // d * d) + (
-                    interval_string_to_milliseconds(interval) / 1000)) * 1000
+                interval_string_to_milliseconds(interval) / 1000)) * 1000
             tolerance = 1e-7
             if abs(next_interval - timestamp) < tolerance:
                 # workaround for floating point rounding error with millis
@@ -767,21 +767,21 @@ def get_next_interval(timestamp: int, interval: str, initialize: bool = False,
         d = timevalue
         if initialize:
             next_interval = ((_ts // d * d) + (
-                    interval_string_to_milliseconds(interval) / 1000)) * 1000
+                interval_string_to_milliseconds(interval) / 1000)) * 1000
         else:
             next_interval = timestamp + d * 1000
     elif timeunit == 'm':
         d = timevalue * 60
         if initialize:
             next_interval = ((_ts // d * d) + (
-                    interval_string_to_milliseconds(interval) / 1000)) * 1000
+                interval_string_to_milliseconds(interval) / 1000)) * 1000
         else:
             next_interval = timestamp + d * 1000
     elif timeunit == 'h':
         d = timevalue * 60 * 60
         if initialize:
             next_interval = ((_ts // d * d) + (
-                    interval_string_to_milliseconds(interval) / 1000)) * 1000
+                interval_string_to_milliseconds(interval) / 1000)) * 1000
         else:
             next_interval = timestamp + d * 1000
     elif timeunit == 'd':

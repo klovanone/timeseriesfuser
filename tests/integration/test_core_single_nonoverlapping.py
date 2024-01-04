@@ -5,11 +5,12 @@ Please view the LICENSE file for the terms and conditions
 associated with this software.
 """
 import os
-import polars as pl
-import pytest
 from pathlib import Path
 
-from timeseriesfuser.classes import DataInfo, BatchEveryIntervalHandler
+import polars as pl
+import pytest
+
+from timeseriesfuser.classes import BatchEveryIntervalHandler, DataInfo
 from timeseriesfuser.core import TimeSeriesFuser
 from timeseriesfuser.datasources import CSVSrc
 
