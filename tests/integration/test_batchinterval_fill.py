@@ -14,7 +14,7 @@ from timeseriesfuser.classes import BatchEveryIntervalHandler
 
 @pytest.fixture
 def setup_parquet_data_1second_fill():
-    fpath = Path('./data/interval_handler/1second_letters_gaps.parquet').resolve()
+    fpath = Path(__file__).parent / 'data/interval_handler/1second_letters_gaps.parquet'
     df = pl.read_parquet(source=fpath)
     columns = df.columns
     timestamp_col = 'Timestamp'
@@ -30,8 +30,9 @@ def data_1s_fill(setup_parquet_data_1second_fill):
 
 @pytest.fixture
 def handler_1s_fill(mocker):
+    op = Path(__file__).parent / 'data/interval_handler/output'
     bihandler = BatchEveryIntervalHandler(batch_interval='1s',
-                                          output_path='./data/interval_handler/output',
+                                          output_path=op,
                                           save_every_n_batch=10000000000,  # never save for test
                                           disable_pl_inference=True,
                                           store_full=True)
@@ -41,8 +42,9 @@ def handler_1s_fill(mocker):
 
 @pytest.fixture
 def handler_1s_fill_keys(mocker):
+    op = Path(__file__).parent / 'data/interval_handler/output'
     bihandler = BatchEveryIntervalHandler(batch_interval='1s',
-                                          output_path='./data/interval_handler/output',
+                                          output_path=op,
                                           save_every_n_batch=10000000000,    # never save for test
                                           disable_pl_inference=True,
                                           store_full=True,
