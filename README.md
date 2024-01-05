@@ -1,5 +1,6 @@
 # Time series data merging with event-driven distribution. 
 
+[![CI](https://github.com/klovanone/timeseriesfuser/actions/workflows/ci.yml/badge.svg)](https://github.com/klovanone/timeseriesfuser/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/Python-3.9+-green.svg)
 [![PyPi](https://img.shields.io/badge/PyPi-timeseriesfuser-brightgreen.svg)](https://pypi.python.org/pypi/timeseriesfuser)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/a8f4fba17c9248589c58cec3b004f427)](https://app.codacy.com/gh/klovanone/timeseriesfuser/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
@@ -203,8 +204,6 @@ Anthony Sweeney - email: [safsweeney@gmail.com](safsweeney@gmail.com)
 	You should have received a copy of the GNU Affero General Public License
 	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			
-
-
 
 
 
