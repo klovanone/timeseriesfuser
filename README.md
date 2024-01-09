@@ -179,7 +179,7 @@ It should be relatively easy to add new file and database formats by subclassing
 
 ## Limitations:
 
-- sometimes events from sources will be missed if they are exactly on a boundary and data is unsorted. This can happen when capturing from an API that sends out of order events. A more in-depth sliding window implementation is on the things todo. A workaround is to sort and save the data source so that data is pre-sorted before processing.
+- See the [ISSUES](https://github.com/klovanone/timeseriesfuser/issues) section for current limitations and what is being worked on. 
     
 
 ## Author:
