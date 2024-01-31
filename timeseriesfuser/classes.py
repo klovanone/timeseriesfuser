@@ -618,6 +618,7 @@ class BatchEveryIntervalHandler(BatchHandler):
                 else:
                     fill_msg = self.blank_msg
                 #  TODO - have different fill types, such as fill with 0 or fill with previous
+                #    31st Jan - start to implement this, put into seperate function
                 fill_msg['__timestamp'] = self.next_batch_ts
                 self._batch_append(fill_msg.copy())
                 self.next_batch_ts = next(self.next_batch_gen)
